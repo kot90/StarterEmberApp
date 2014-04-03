@@ -22,11 +22,26 @@
 
 
 <script type="text/x-handlebars" data-template-name="index">
-    <ul>
-    {{#each item in model}}
-      <li>{{item}}</li>
+  <div class='about'>
+    <form {{action loadList on='submit'}}>
+      {{view Ember.TextField valueBinding="subreddit" id="subreddit" placeholder="Subreddit" required="true"}}
+      <button type="submit">Go!</button>
+    </form>
+  </div>
+
+
+
+   <h2>Links from /r/{{subredditHeader}}</h2>
+   <ul>
+   {{#each link in model}}
+      <li>
+        {{#if link.thumbnailUrl}}
+          <img {{bindAttr src="link.thumbnailUrl"}}
+        {{/if}}
+        <a {{bindAttr href="link.url"}} target = "_blank">{{link.title}}</a>
+      </li>
     {{/each}}
-    </ul>
+   </ul>
 </script>
 
 <script type="text/x-handlebars" data-template-name="about">
